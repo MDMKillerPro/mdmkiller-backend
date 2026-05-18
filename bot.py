@@ -4,16 +4,28 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pymongo import MongoClient
 import threading
 import time
+from flask import Flask
+
+# --- 🌐 Flask Server for Render Free Tier ---
+# Render Free Web Service ko port 10000 chahiye hota hai, yeh dummy server wahi kaam karega.
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "MdmKillerPro Bot is Live and Running!"
+
+def run_flask():
+    # Render se port uthayega, default 10000
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
 
 # --- 🔐 Configuration via Environment Variables ---
-# Ye data GitHub par nahi dikhega, ise hum direct Render panel me fill karenge
 MONGO_URI = os.getenv("MONGO_URI")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID_ENV = os.getenv("ADMIN_ID")
 
-# Check ki variables set hain ya nahi (for safety)
 if not MONGO_URI or not BOT_TOKEN or not ADMIN_ID_ENV:
-    print("❌ ERROR: Environment Variables missing! Render panel me MONGO_URI, BOT_TOKEN, aur ADMIN_ID set karein.")
+    print("❌ ERROR: Variables Missing! Render panel me set karein.")
     exit(1)
 
 ADMIN_TELEGRAM_ID = int(ADMIN_ID_ENV)
@@ -25,7 +37,6 @@ users_collection = db['users']
 
 bot = telebot.TeleBot(BOT_TOKEN, parse_mode="Markdown")
 
-
 # --- ⏳ Auto Delete Helper Function ---
 def auto_delete_messages(chat_id, message_ids, delay=10):
     def delete():
@@ -36,7 +47,6 @@ def auto_delete_messages(chat_id, message_ids, delay=10):
             except Exception:
                 pass 
     threading.Thread(target=delete).start()
-
 
 # 1. /menu - Interactive Control Panel
 @bot.message_handler(commands=['menu'])
@@ -55,7 +65,6 @@ def send_menu(message):
     markup.add(btn_download, btn_panel, btn_support, btn_channel)
     sent_msg = bot.send_message(message.chat.id, text, reply_markup=markup)
     auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=15)
-
 
 # 2. /profile - Check Balance & Role
 @bot.message_handler(commands=['profile'])
@@ -82,11 +91,10 @@ def check_profile(message):
             sent_msg = bot.reply_to(message, "❌ Is email se koi account nahi mila.")
             
         auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=10)
-    except Exception as e:
+    except Exception:
         pass
 
-
-# 3. /register - Group se hi naya account banana
+# 3. /register - Group Account Creation
 @bot.message_handler(commands=['register'])
 def register_user(message):
     try:
@@ -100,198 +108,102 @@ def register_user(message):
         password = args[2].strip()
         
         if users_collection.find_one({"email": email}):
-            sent_msg = bot.reply_to(message, "❌ Is email se account pehle se bana hua hai.")
+            sent_msg = bot.reply_to(message, "❌ Account already exists.")
             auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
             return
             
-        users_collection.insert_one({
-            "email": email,
-            "password": password,
-            "role": "reseller",
-            "credits": 0,
-            "status": "inactive"
-        })
-        sent_msg = bot.reply_to(message, f"✅ **Account Created!**\n📧 Email: {email}\nAb isse `/activate` karein.")
+        users_collection.insert_one({"email": email, "password": password, "role": "reseller", "credits": 0, "status": "inactive"})
+        sent_msg = bot.reply_to(message, f"✅ **Account Created!**\n📧 Email: {email}\nNow use `/activate`.")
         auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=10)
-    except Exception as e:
+    except Exception:
         pass
 
-
-# 4. /activate - USER/EMAIL ACTIVATION (Deducts 100 credits)
+# 4. /activate - Email Activation (100 Credits Cost)
 @bot.message_handler(commands=['activate'])
 def activate_user_account(message):
     try:
         args = message.text.split()
         if len(args) < 3:
-            sent_msg = bot.reply_to(message, "⚠️ Format: `/activate [your_reseller_email] [target_user_email]`")
+            sent_msg = bot.reply_to(message, "⚠️ Format: `/activate [your_email] [target_email]`")
             auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=6)
             return
             
-        reseller_email = args[1].strip()
-        target_email = args[2].strip()
-        
+        reseller_email, target_email = args[1].strip(), args[2].strip()
         reseller = users_collection.find_one({"email": reseller_email})
-        if not reseller:
-            sent_msg = bot.reply_to(message, "❌ Reseller account nahi mila.")
-            auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
-            return
-            
-        reseller_credits = reseller.get('credits', 0)
-        if reseller_credits < 100:
-            sent_msg = bot.reply_to(message, f"❌ Insufficient Credits! Aapke paas {reseller_credits} credits hain. (Activation cost = 100 Credits)")
-            auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=6)
-            return
-            
-        target_user = users_collection.find_one({"email": target_email})
-        if not target_user:
-            sent_msg = bot.reply_to(message, "❌ Jis User ko activate karna hai, wo registered nahi hai.")
-            auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
-            return
-            
-        if target_user.get('status') == "active":
-            sent_msg = bot.reply_to(message, "ℹ️ Ye user account pehle se hi Active hai.")
-            auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
-            return
-
-        users_collection.update_one({"email": reseller_email}, {"$inc": {"credits": -100}})
-        users_collection.update_one({"email": target_email}, {"$set": {"status": "active"}})
         
-        sent_msg = bot.reply_to(message, f"🎉 **Activation Successful!**\n📧 **Activated Email:** {target_email}\n💰 100 Credits deducted from {reseller_email}.")
+        if not reseller or reseller.get('credits', 0) < 100:
+            sent_msg = bot.reply_to(message, "❌ Credits kam hain ya account nahi mila.")
+            auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
+            return
+            
+        if users_collection.update_one({"email": target_email}, {"$set": {"status": "active"}}).matched_count > 0:
+            users_collection.update_one({"email": reseller_email}, {"$inc": {"credits": -100}})
+            sent_msg = bot.reply_to(message, f"🎉 **{target_email} Activated!**")
+        else:
+            sent_msg = bot.reply_to(message, "❌ Target user nahi mila.")
+            
         auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=12)
-        
-    except Exception as e:
+    except Exception:
         pass
 
-
-# 5. /checkuser - Check if an email is active or inactive
+# 5. /checkuser - Account Status
 @bot.message_handler(commands=['checkuser'])
 def check_user_status(message):
     try:
         args = message.text.split()
-        if len(args) < 2:
-            sent_msg = bot.reply_to(message, "⚠️ Format: `/checkuser [email]`")
-            auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
-            return
-            
-        email = args[1].strip()
-        user = users_collection.find_one({"email": email})
-        
+        if len(args) < 2: return
+        user = users_collection.find_one({"email": args[1].strip()})
         if user:
             status = user.get('status', 'inactive').upper()
-            icon = "🟢" if status == "ACTIVE" else "🔴"
-            sent_msg = bot.reply_to(message, f"{icon} **User Status:** {status}\n📧 Email: {email}")
+            sent_msg = bot.reply_to(message, f"{'🟢' if status == 'ACTIVE' else '🔴'} Status: {status}")
         else:
-            sent_msg = bot.reply_to(message, f"❌ Account not found in database.")
-            
+            sent_msg = bot.reply_to(message, "❌ Not Found.")
         auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=8)
-    except Exception as e:
+    except Exception:
         pass
-
 
 # 6. /addcredits - ADMIN ONLY
 @bot.message_handler(commands=['addcredits'])
 def add_credits(message):
-    if message.from_user.id != ADMIN_TELEGRAM_ID:
-        return
-        
+    if message.from_user.id != ADMIN_TELEGRAM_ID: return
     try:
         args = message.text.split()
-        if len(args) < 3:
-            sent_msg = bot.reply_to(message, "⚠️ Format: `/addcredits [email] [amount]`")
-            auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
-            return
-            
-        email = args[1].strip()
-        amount = int(args[2].strip())
-        
-        result = users_collection.update_one({"email": email}, {"$inc": {"credits": amount}})
-        if result.matched_count > 0:
-            sent_msg = bot.reply_to(message, f"✅ Added **{amount} credits** to {email}!")
-        else:
-            sent_msg = bot.reply_to(message, "❌ User nahi mila.")
-            
-        auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=8)
-    except Exception as e:
+        users_collection.update_one({"email": args[1].strip()}, {"$inc": {"credits": int(args[2])}})
+        bot.reply_to(message, "✅ Credits Added!")
+    except Exception:
         pass
 
-
-# 7. /setrole - ADMIN ONLY
-@bot.message_handler(commands=['setrole'])
-def set_role(message):
-    if message.from_user.id != ADMIN_TELEGRAM_ID:
-        return
-        
-    try:
-        args = message.text.split()
-        if len(args) < 3:
-            sent_msg = bot.reply_to(message, "⚠️ Format: `/setrole [email] [distributor/reseller]`")
-            auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
-            return
-            
-        email = args[1].strip()
-        role = args[2].strip().lower()
-        
-        users_collection.update_one({"email": email}, {"$set": {"role": role}})
-        sent_msg = bot.reply_to(message, f"⚙️ {email} ka role badal kar **{role.upper()}** kar diya gaya.")
-        auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=8)
-    except Exception as e:
-        pass
-
-
-# 8. /stats - ADMIN ONLY
+# 7. /stats - ADMIN ONLY
 @bot.message_handler(commands=['stats'])
 def show_stats(message):
-    if message.from_user.id != ADMIN_TELEGRAM_ID:
-        return
-    
-    total_users = users_collection.count_documents({})
-    total_active = users_collection.count_documents({"status": "active"})
-    
-    stats_text = (
-        "📊 **MdmKillerPro Database Stats**\n\n"
-        f"👥 Total Accounts: {total_users}\n"
-        f"🟢 Active Accounts: {total_active}"
-    )
-    sent_msg = bot.reply_to(message, stats_text)
-    auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=15)
+    if message.from_user.id != ADMIN_TELEGRAM_ID: return
+    total = users_collection.count_documents({})
+    active = users_collection.count_documents({"status": "active"})
+    bot.reply_to(message, f"📊 Total: {total}\n🟢 Active: {active}")
 
-
-# 9. /cleanwelcome - Toggle logic for Welcomes
+# 8. /cleanwelcome - Clean Welcomes
 clean_welcome_status = {}
 last_welcome_msg_id = {}
 
 @bot.message_handler(commands=['cleanwelcome'])
 def toggle_clean_welcome(message):
-    args = message.text.split()
-    if len(args) < 2:
-        sent_msg = bot.reply_to(message, "⚠️ Use: `/cleanwelcome on` or `off`")
-        auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
-        return
-        
-    status = args[1].strip().lower()
+    status = message.text.split()[1].lower() if len(message.text.split()) > 1 else "off"
     clean_welcome_status[message.chat.id] = (status == "on")
-    
-    state = "ON" if clean_welcome_status[message.chat.id] else "OFF"
-    sent_msg = bot.reply_to(message, f"🧹 **Clean Welcome is now {state}.**")
-    auto_delete_messages(message.chat.id, [message.message_id, sent_msg.message_id], delay=5)
+    bot.reply_to(message, f"🧹 Clean Welcome: {status.upper()}")
 
-
-# --- Welcome Message Logic ---
 @bot.message_handler(content_types=['new_chat_members'])
 def welcome_new_member(message):
     chat_id = message.chat.id
-    
     if clean_welcome_status.get(chat_id) and chat_id in last_welcome_msg_id:
-        try:
-            bot.delete_message(chat_id, last_welcome_msg_id[chat_id])
-        except Exception:
-            pass
-            
-    for member in message.new_chat_members:
-        welcome_text = f"👋 Hey {member.first_name}, Welcome to **MdmKillerPro Official**!\n\nTool use karne ke liye `/menu` type karein."
-        sent_msg = bot.send_message(chat_id, welcome_text)
-        last_welcome_msg_id[chat_id] = sent_msg.message_id
+        try: bot.delete_message(chat_id, last_welcome_msg_id[chat_id])
+        except Exception: pass
+    sent_msg = bot.send_message(chat_id, f"👋 Hey {message.new_chat_members[0].first_name}, Welcome! Type `/menu`.")
+    last_welcome_msg_id[chat_id] = sent_msg.message_id
 
-print("MdmKillerPro Environment-Ready Bot is running...")
-bot.infinity_polling()
-
+# --- 🚀 Main Execution ---
+if __name__ == "__main__":
+    # Flask ko thread me chalana takki Render port 10000 check kar sake
+    threading.Thread(target=run_flask).start()
+    
+    print("MdmKillerPro Bot is Starting...")
+    bot.infinity_polling()
