@@ -2,3 +2,5 @@ flask
 pymongo
 flask_cors
 gunicorn
+pyTelegramBotAPI
+dnspython
