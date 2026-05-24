@@ -3,263 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDMKillerPro | Premium Android Solutions</title>
+    <title>MDMKillerPro | Permanent Device Unlock</title>
     <style>
-        :root {
-            --neon: #00FFD1;
-            --glass: rgba(15, 23, 42, 0.85);
-            --border: rgba(255, 255, 255, 0.1);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: all 0.2s ease;
         }
 
-        * { box-sizing: border-box; transition: all 0.3s ease; }
-
-        body { 
-            font-family: 'Inter', sans-serif; background: #020617; color: white; margin: 0; padding: 0;
+        body {
+            background-color: #121820;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        .bg-animate {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, #1e293b 0%, #020617 80%);
-            z-index: -1;
+        /* Top Navigation Bar */
+        nav {
+            background-color: #161d26;
+            border-bottom: 1px solid #1f2a38;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        nav { 
-            background: var(--glass); backdrop-filter: blur(20px);
-            padding: 15px 5%; border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; z-index: 1000;
-        }
-        
-        .logo { 
-            font-size: 20px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; text-align: center; margin-bottom: 12px;
+        .nav-items {
+            display: flex;
+            gap: 20px;
+            list-style: none;
         }
 
-        .nav-items { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .nav-link { 
-            text-decoration: none; color: #94A3B8; font-size: 11px; font-weight: 800;
-            padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); cursor: pointer;
-        }
-        .nav-link:hover, .nav-link.active { color: var(--neon); border-color: var(--neon); background: rgba(0, 255, 209, 0.05); }
-
-        .hero { max-width: 900px; margin: auto; padding: 40px 20px; text-align: center; }
-
-        h1 { font-size: clamp(30px, 8vw, 52px); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin: 0; }
-        .neon-span { color: var(--neon); text-shadow: 0 0 30px rgba(0, 255, 209, 0.3); }
-        .subtitle { color: #64748B; font-size: 16px; margin-top: 15px; font-weight: 500; }
-
-        .btn-group { display: flex; justify-content: center; gap: 20px; margin: 40px 0; }
-        .btn-elite { 
-            padding: 18px 35px; border-radius: 14px; font-weight: 900; font-size: 15px;
-            text-decoration: none; cursor: pointer; text-transform: uppercase;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.4); position: relative; border: none;
-        }
-        .btn-elite:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,0.4); }
-        .btn-get { background: white; color: #020617; }
-        .btn-buy { background: #10B981; color: white; }
-
-        /* Main Sections Visibility */
-        .content-section { display: none; }
-        .content-section.active { display: block; animation: fadeIn 0.5s ease; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Cards and Panels */
-        .panel-card {
-            background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border);
-            backdrop-filter: blur(15px); padding: 40px; border-radius: 30px;
-            max-width: 480px; margin: 30px auto; text-align: left;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-        }
-        .panel-card h2 { margin: 0 0 25px; font-size: 22px; font-weight: 800; color: white; text-align: center; }
-        
-        .field { margin-bottom: 15px; }
-        input, select {
-            width: 100%; padding: 16px; background: rgba(0,0,0,0.4); border: 1px solid #334155;
-            border-radius: 12px; color: white; font-size: 15px; outline: none;
-        }
-        input:focus, select:focus { border-color: var(--neon); }
-
-        .btn-action { 
-            width: 100%; background: var(--neon); color: #020617; font-weight: 900; 
-            padding: 18px; border-radius: 12px; border: none; cursor: pointer; font-size: 16px;
-            text-transform: uppercase;
-        }
-        .btn-action:hover { box-shadow: 0 0 20px rgba(0, 255, 209, 0.4); }
-
-        .result-box { 
-            margin-top: 20px; padding: 15px; background: #0f172a; border: 1px dashed var(--neon); 
-            border-radius: 10px; word-break: break-all; color: var(--neon); font-family: monospace; text-align: center;
+        .nav-link {
+            color: #8fa0b5;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
         }
 
-        .stats-row { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
-            gap: 15px; margin-top: 50px; 
+        .nav-link:hover, .nav-link.active {
+            color: #ffffff;
         }
-        .stat-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 25px; border-radius: 20px; }
-        .stat-card h3 { margin: 0; font-size: 26px; color: var(--neon); font-weight: 900; }
-        .stat-card p { font-size: 10px; font-weight: 800; color: #64748B; margin-top: 8px; letter-spacing: 2px; }
 
-        footer { padding: 60px; font-size: 11px; font-weight: 800; color: #475569; letter-spacing: 2px; text-align: center; }
+        /* Main Container */
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .deployment-status {
+            color: #4ade80;
+            font-size: 14px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        /* Buy Now Button */
+        .btn-buy {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 35px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+            margin-bottom: 35px;
+        }
+
+        .btn-buy:hover {
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+            transform: translateY(-1px);
+        }
+
+        /* Portal Card Box */
+        .portal-card {
+            background-color: #19222d;
+            border: 1px solid #243141;
+            border-radius: 12px;
+            padding: 30px 25px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+
+        /* Custom SVG Metallic Shield Logo */
+        .shield-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px auto;
+            display: block;
+        }
+
+        .portal-title {
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 15px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* Form Fields */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            background-color: #121820;
+            border: 1px solid #243141;
+            border-radius: 6px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+        }
+
+        /* Request Activation Button */
+        .btn-submit {
+            width: 100%;
+            background-color: #2e3947;
+            border: 1px solid #3f4d5e;
+            color: #cbd5e1;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: #344252;
+            color: #ffffff;
+        }
+
+        /* Info Status Rows */
+        .status-row {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .status-val-active { color: #4ade80; }
+        .status-val-live { color: #64748b; }
+        .status-val-rate { color: #10b981; }
+
+        /* Bottom Branding Section */
+        .branding {
+            margin: 20px 0;
+        }
+
+        .brand-logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 10px auto;
+            display: block;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        /* Footer Links */
+        footer {
+            margin-top: auto;
+            padding-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #94a3b8;
+        }
+
+        .copyright {
+            font-size: 11px;
+            color: #475569;
+        }
     </style>
 </head>
 <body>
 
-<div class="bg-animate"></div>
-
 <nav>
-    <div class="logo">MDMKillerPro</div>
-    <div class="nav-items">
-        <a class="nav-link active" onclick="switchSection('home-page', this)">HOME</a>
-        <a class="nav-link" onclick="switchSection('management-page', this)">USER MANAGEMENT</a>
-    </nav>
+    <ul class="nav-items">
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link active" href="/distributor&resellers">Distributors</a></li>
+        <li><a class="nav-link" href="/distributor&resellers">Resellers</a></li>
+        <li><a class="nav-link" href="#">Pricing</a></li>
+        <li><a class="nav-link" href="#">Models</a></li>
+        <li><a class="nav-link" href="#">API</a></li>
+    </ul>
 </nav>
 
-<div class="hero">
+<div class="container">
+    <div class="deployment-status">Deployment Stable 2.0</div>
+    <h1>Permanent Device Unlock</h1>
     
-    <div id="home-page" class="content-section active">
-        <div style="color: #10B981; font-size: 11px; font-weight: 900; letter-spacing: 4px; margin-bottom: 15px;">SECURE SERVER LIVE</div>
-        <h1>The Ultimate <br><span class="neon-span">Android 16 Unlocker</span></h1>
-        <p class="subtitle">World's most advanced permanent KG & MDM solution.</p>
+    <button class="btn-buy" onclick="window.open('https://t.me/Mdmkillerpro', '_blank')">Buy Now</button>
+
+    <div class="portal-card">
+        <svg class="shield-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#243141" stroke="#475569" stroke-width="2"/>
+            <path d="M30 12L12 18.5V30C12 41.2 22.5 47.8 30 49.5C37.5 47.8 48 41.2 48 30V18.5L30 12Z" fill="#1e293b"/>
+            <path d="M22 22L30 30L38 22M30 30V40" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         
-        <div class="btn-group">
-            <a href="https://mega.nz/file/KnQgjDRR#7SLEElXuyElR2HTIH4FPqiZ_kOH6zhgHRCxQEPWNQ4A" class="btn-elite btn-get">DOWNLOAD TOOL</a>
-            <a href="https://t.me/Mdmkillerpro" class="btn-elite btn-buy">BUY ACTIVATION</a>
+        <div class="portal-title">Reseller & Distributor Portal</div>
+        
+        <div class="form-group">
+            <label>Secret Key</label>
+            <input type="password" id="auth_key" placeholder="Enter Secret Key">
         </div>
-
-        <div class="panel-card">
-            <h2>Account Registration</h2>
-            <div class="field"><input type="email" id="reg_email" placeholder="Enter Email Address"></div>
-            <div class="field"><input type="password" id="reg_pass" placeholder="Create Access Password"></div>
-            <button class="btn-action" onclick="handleRegister()">Initialize System Access</button>
-            <div id="reg_status" style="margin-top: 20px; text-align: center; font-weight: 800; font-size: 13px;"></div>
+        
+        <div class="form-group">
+            <label>Customer Email</label>
+            <input type="email" id="customer_email" placeholder="Customer Email">
         </div>
+        
+        <button class="btn-submit" onclick="processActivation()">Request Activation</button>
+        
+        <div class="status-row">API Status: <span class="status-val-active">Active</span></div>
+        <div class="status-row">Server: <span class="status-val-live">24/7 Live</span></div>
+        <div class="status-row">Activation Rate: <span class="status-val-rate">100%</span></div>
+        
+        <div id="status_message" style="margin-top: 15px; font-size: 13px; text-align: center; font-weight: bold; display: none;"></div>
     </div>
 
-    <div id="management-page" class="content-section">
-        <div class="panel-card">
-            <h2>Administrative Control</h2>
-            <div class="field"><input type="password" id="auth_key" placeholder="Enter Secret Admin/Reseller Key"></div>
-            
-            <hr style="border: 0.5px solid #334155; margin: 25px 0;">
-            
-            <h3 style="text-align: left; font-size: 16px; margin-bottom: 15px; color: #94a3b8;">Perform Operation:</h3>
-            
-            <div class="field">
-                <select id="op_type" onchange="toggleFields()">
-                    <option value="activate">Activate Customer Email (Cost: 100 Cr)</option>
-                    <option value="create_acc">Create Management Account (Distributor Only)</option>
-                </select>
-            </div>
+    <div class="branding">
+        <svg class="brand-logo" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#1e293b" stroke="#64748b" stroke-width="3"/>
+            <path d="M18 22V38M18 22L30 30L42 22M42 22V38" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="brand-name">MDMKILLERPRO</div>
+    </div>
 
-            <div class="field"><input type="text" id="input_main" placeholder="Customer Email to Activate"></div>
-            
-            <div id="extra-fields" style="display: none;">
-                <div class="field">
-                    <select id="sub_role">
-                        <option value="reseller">Reseller Account</option>
-                        <option value="distributor">Distributor Account</option>
-                    </select>
-                </div>
-                <div class="field"><input type="number" id="input_credits" placeholder="Allocate Credits"></div>
-            </div>
-
-            <button class="btn-action" style="margin-top: 10px;" onclick="executeAction()">Submit Action</button>
-            <div id="mgmt_status" class="result-box" style="display: none;"></div>
+    <footer>
+        <div class="footer-links">
+            <a href="#">Support</a> | 
+            <a href="#">Contact</a> | 
+            <a href="#">FAQ</a> | 
+            <a href="#">Global API Docs</a>
         </div>
-    </div>
-
-    <div class="stats-row">
-        <div class="stat-card"><h3>S26+</h3><p>FULL SUPPORT</p></div>
-        <div class="stat-card"><h3>100%</h3><p>PERMANENT</p></div>
-        <div class="stat-card"><h3>⚡</h3><p>AUTO SERVER</p></div>
-        <div class="stat-card"><h3>API</h3><p>CONNECTED</p></div>
-    </div>
+        <div class="copyright">© 2026 MDMKILLERPRO GLOBAL</div>
+    </footer>
 </div>
 
-<footer>© 2026 MDMKILLERPRO | ENCRYPTED PROTOCOLS</footer>
-
 <script>
-    function switchSection(sectionId, element) {
-        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        document.getElementById(sectionId).classList.add('active');
-        element.classList.add('active');
-    }
+    async function processActivation() {
+        const apiKey = document.getElementById('auth_key').value;
+        const email = document.getElementById('customer_email').value;
+        const msgBox = document.getElementById('status_message');
 
-    function toggleFields() {
-        const op = document.getElementById('op_type').value;
-        const mainInput = document.getElementById('input_main');
-        const extraFields = document.getElementById('extra-fields');
-        
-        if(op === 'activate') {
-            mainInput.placeholder = "Customer Email to Activate";
-            extraFields.style.display = "none";
-        } else {
-            mainInput.placeholder = "New User Full Name";
-            extraFields.style.display = "block";
+        if(!apiKey || !email) {
+            alert("Please fill in all fields.");
+            return;
         }
-    }
 
-    async function handleRegister() {
-        const email = document.getElementById('reg_email').value;
-        const password = document.getElementById('reg_pass').value;
-        const status = document.getElementById('reg_status');
-        if(!email || !password) { status.innerText = "FIELDS REQUIRED"; status.style.color = "#EF4444"; return; }
-        
+        msgBox.style.display = "block";
+        msgBox.style.color = "#94a3b8";
+        msgBox.innerText = "Processing activation request...";
+
         try {
-            const res = await fetch('/register', {
+            const res = await fetch('/api/v1/activate-user', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({email, password})
+                body: JSON.stringify({api_key: apiKey, user_email: email})
             });
+            const data = await res.json();
+            
             if(res.ok) {
-                status.innerText = "SUCCESS! PROCEED TO TOOL LOGIN."; status.style.color = "#10B981";
+                msgBox.style.color = "#4ade80";
+                msgBox.innerText = "Activation Successful! Remaining credits: " + data.remaining_credits;
             } else {
-                status.innerText = "FAILED: ACCOUNT EXISTS."; status.style.color = "#EF4444";
+                msgBox.style.color = "#ef4444";
+                msgBox.innerText = "Error: " + (data.error || "Failed to process request");
             }
-        } catch(e) { status.innerText = "SERVER ERROR"; }
-    }
-
-    async function executeAction() {
-        const apiKey = document.getElementById('auth_key').value;
-        const op = document.getElementById('op_type').value;
-        const mainVal = document.getElementById('input_main').value;
-        const statusBox = document.getElementById('mgmt_status');
-
-        if(!apiKey || !mainVal) { alert("Please fill all fields"); return; }
-        statusBox.style.display = "block"; statusBox.innerText = "Processing...";
-
-        if(op === 'activate') {
-            // Call User Activation API
-            try {
-                const res = await fetch('/api/v1/activate-user', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({api_key: apiKey, user_email: mainVal})
-                });
-                const data = await res.json();
-                if(res.ok) {
-                    statusBox.innerText = `SUCCESS: User Activated. Remaining Balance: ${data.remaining_credits} Credits.`;
-                } else {
-                    statusBox.innerText = `ERROR: ${data.error || "Invalid Key or User"}`;
-                }
-            } catch(e) { statusBox.innerText = "API Network Error"; }
-        } else {
-            // Call Create Management Account API
-            const role = document.getElementById('sub_role').value;
-            const credits = parseInt(document.getElementById('input_credits').value) || 0;
-            try {
-                const res = await fetch('/api/v1/create-partner', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({api_key: apiKey, name: mainVal, role: role, credits: credits})
-                });
-                const data = await res.json();
-                if(res.ok) {
-                    statusBox.innerText = `ACCOUNT CREATED!\nSECRET KEY: ${data.generated_key}`;
-                } else {
-                    statusBox.innerText = `ERROR: ${data.error || "Unauthorized"}`;
-                }
-            } catch(e) { statusBox.innerText = "API Network Error"; }
+        } catch(e) {
+            msgBox.style.color = "#ef4444";
+            msgBox.innerText = "Server connection failed.";
         }
     }
 </script>
