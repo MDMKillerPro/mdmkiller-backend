@@ -30,7 +30,7 @@
             width: 100%;
             max-width: 900px;
             height: 450px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(0, 127, 255, 0.08) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
             pointer-events: none;
         }
@@ -63,11 +63,16 @@
             fill: none;
         }
 
+        /* Branding Text Color Logic */
         .nav-logo-text {
             font-size: 16px;
             font-weight: 800;
             letter-spacing: 0.5px;
             color: #ffffff;
+        }
+
+        .blue-brand {
+            color: #007fff; /* Electric Blue */
         }
 
         .nav-items {
@@ -88,7 +93,7 @@
         }
 
         .nav-link:hover, .nav-link.active {
-            color: #10b981;
+            color: #007fff;
         }
 
         .nav-link-portal {
@@ -115,7 +120,7 @@
         }
 
         .deployment-tag {
-            color: #10b981;
+            color: #007fff;
             font-size: 13px;
             font-weight: 700;
             letter-spacing: 2px;
@@ -134,7 +139,8 @@
             -webkit-text-fill-color: transparent;
         }
 
-        #home-section { display: block; }
+        .content-section { display: none; }
+        .content-section.active-view { display: block; }
 
         .btn-layout-grid {
             display: flex;
@@ -153,6 +159,7 @@
             border-radius: 8px;
             font-weight: 700;
             font-size: 16px;
+            letter-spacing: 0.5px;
             border: none;
             cursor: pointer;
             width: 100%;
@@ -165,7 +172,6 @@
             box-shadow: 0 15px 30px rgba(16, 185, 129, 0.45);
         }
 
-        /* Glossy Blue Button Structure without version labels */
         .btn-download-now {
             display: inline-flex;
             align-items: center;
@@ -197,9 +203,8 @@
             fill: currentColor;
         }
 
-        /* PUBLIC DIRECTORY NETWORK DATA LIST */
+        /* PUBLIC DIRECTORY NETWORK LIST */
         #network-section {
-            display: none;
             text-align: left;
             animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -209,7 +214,7 @@
             color: #cbd5e1;
             margin: 40px 0 20px 0;
             font-weight: 700;
-            border-left: 4px solid #10b981;
+            border-left: 4px solid #007fff;
             padding-left: 12px;
         }
 
@@ -226,14 +231,13 @@
         }
 
         .info-block h3 { font-size: 17px; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 10px; }
-        .verify-tag { font-size: 10px; font-weight: 800; background-color: rgba(16, 185, 129, 0.12); color: #10b981; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+        .verify-tag { font-size: 10px; font-weight: 800; background-color: rgba(0, 127, 255, 0.12); color: #007fff; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
         .info-block p { font-size: 14px; color: #64748b; margin-top: 5px; }
         .btn-contact-partner { background-color: #1b2330; border: 1px solid #2d3949; color: #cbd5e1; text-decoration: none; padding: 11px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; }
-        .btn-contact-partner:hover { background-color: #10b981; border-color: #10b981; color: #ffffff; }
+        .btn-contact-partner:hover { background-color: #007fff; border-color: #007fff; color: #ffffff; }
 
-        /* RE-ENGINEERED STAFF LIVE CONTROL PANELS */
+        /* PORTAL PANEL */
         #portal-section {
-            display: none;
             text-align: left;
             max-width: 550px;
             margin: 20px auto;
@@ -277,11 +281,11 @@
         .history-table td { padding: 8px; color: #cbd5e1; border-bottom: 1px solid #161f28; }
 
         .status-row { font-size: 13px; color: #64748b; margin-bottom: 6px; }
-        .active-green { color: #10b981; }
+        .active-blue { color: #007fff; }
 
         @keyframes slideUpFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Floating Circular Telegram Trigger */
+        /* Floating Circular Telegram */
         .floating-telegram {
             position: fixed;
             bottom: 30px;
@@ -300,6 +304,7 @@
         .floating-telegram:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 25px rgba(36, 161, 222, 0.6); }
         .floating-tg-icon { width: 30px; height: 30px; fill: #ffffff; margin-right: 2px; }
 
+        /* Footer Custom Framework */
         .branding-footer { margin-top: auto; padding: 60px 20px 40px 20px; border-top: 1px solid rgba(36, 49, 65, 0.25); }
         .brand-footer-logo-svg { width: 45px; height: 45px; margin: 0 auto 12px auto; display: block; }
         .brand-title { font-size: 17px; font-weight: 700; letter-spacing: 2px; color: #ffffff; }
@@ -316,10 +321,10 @@
 <nav>
     <div class="brand-container" onclick="toggleView('home')">
         <svg class="header-logo-svg" viewBox="0 0 60 60">
-            <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#1f2a38" stroke="#ffffff" stroke-width="3"/>
-            <path d="M18 22V38M18 22L30 30L42 22M42 22V38" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#121822" stroke="#007fff" stroke-width="3"/>
+            <path d="M18 22V38M18 22L30 30L42 22M42 22V38" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <div class="nav-logo-text">MDMKILLERPRO</div>
+        <div class="nav-logo-text"><span class="blue-brand">MDM</span>KILLERPRO</div>
     </div>
     <ul class="nav-items">
         <li><a id="nav-home" class="nav-link active" onclick="toggleView('home')">Home</a></li>
@@ -333,7 +338,7 @@
 
 <div class="container">
 
-    <div id="home-section">
+    <div id="home-section" class="content-section active-view">
         <div class="deployment-tag">Deployment Stable 2.0</div>
         <h1>Permanent Device Unlock</h1>
         
@@ -348,7 +353,7 @@
         </div>
     </div>
 
-    <div id="network-section">
+    <div id="network-section" class="content-section">
         <div class="section-title">Authorized Distributors</div>
         <div class="list-card">
             <div class="info-block">
@@ -357,12 +362,29 @@
             </div>
             <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
         </div>
+        
+        <div class="list-card">
+            <div class="info-block">
+                <h3>Asia Unlocker Team <span class="verify-tag">Verified</span></h3>
+                <p>Region: Asia & Mainland Infrastructure</p>
+            </div>
+            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
+        </div>
+
+        <div class="section-title">Official Resellers</div>
+        <div class="list-card">
+            <div class="info-block">
+                <h3>Elite Phone Fix <span class="verify-tag">Online</span></h3>
+                <p>Instant Direct Server Key Vendor</p>
+            </div>
+            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
+        </div>
     </div>
 
-    <div id="portal-section">
+    <div id="portal-section" class="content-section">
         <div class="portal-header-box">
             <svg class="portal-logo-shield" viewBox="0 0 60 60">
-                <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#1f2a38" stroke="#38bdf8" stroke-width="2"/>
+                <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#131a22" stroke="#007fff" stroke-width="2"/>
                 <path d="M22 22L30 30L38 22M30 30V40" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <div class="portal-title-text" id="partner-panel-title">Reseller & Distributor Portal</div>
@@ -402,8 +424,8 @@
         </table>
 
         <div style="margin-top: 25px;">
-            <div class="status-row">API Status: <span class="active-green">Active</span></div>
-            <div class="status-row">Server: <span class="active-green">24/7 Live</span></div>
+            <div class="status-row">API Status: <span class="active-blue">Active</span></div>
+            <div class="status-row">Server: <span class="active-blue">24/7 Live</span></div>
         </div>
     </div>
 
@@ -418,7 +440,7 @@
             <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#151c25" stroke="#222d3a" stroke-width="3"/>
             <path d="M18 22V38M18 22L30 30L42 22M42 22V38" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <div class="brand-title">MDMKILLERPRO</div>
+        <div class="brand-title"><span class="blue-brand">MDM</span>KILLERPRO</div>
         <div class="footer-sub-links">
             <a href="#">Support</a> • <a href="#">Contact</a> • <a href="#">FAQ</a> • <a href="#">Global API Docs</a>
         </div>
@@ -431,18 +453,28 @@
         const homeSec = document.getElementById('home-section');
         const netSec = document.getElementById('network-section');
         const portalSec = document.getElementById('portal-section');
+        
         const navHome = document.getElementById('nav-home');
         const navNet = document.getElementById('nav-network');
         const navPort = document.getElementById('nav-portal');
 
-        navHome.classList.remove('active'); navNet.classList.remove('active'); navPort.classList.remove('active');
+        homeSec.classList.remove('active-view');
+        netSec.classList.remove('active-view');
+        portalSec.classList.remove('active-view');
+        
+        navHome.classList.remove('active'); 
+        navNet.classList.remove('active'); 
+        navPort.classList.remove('active');
 
         if(viewType === 'home') {
-            homeSec.style.display = 'block'; netSec.style.display = 'none'; portalSec.style.display = 'none'; navHome.classList.add('active');
+            homeSec.classList.add('active-view');
+            navHome.classList.add('active');
         } else if(viewType === 'network') {
-            homeSec.style.display = 'none'; netSec.style.display = 'block'; portalSec.style.display = 'none'; navNet.classList.add('active');
+            netSec.classList.add('active-view');
+            navNet.classList.add('active');
         } else if(viewType === 'portal') {
-            homeSec.style.display = 'none'; netSec.style.display = 'none'; portalSec.style.display = 'block'; navPort.classList.add('active');
+            portalSec.classList.add('active-view');
+            navPort.classList.add('active');
         }
     }
 
@@ -465,4 +497,38 @@
                 
                 const tbody = document.getElementById('history-log-rows');
                 tbody.innerHTML = '';
+                
+                if(data.history.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center;color:#475569;">No accounts activated yet.</td></tr>`;
+                } else {
+                    data.history.forEach(log => {
+                        tbody.innerHTML += `<tr><td>${log.email}</td><td>${log.activation_date || 'N/A'}</td></tr>`;
+                    });
+                }
+            } else { alert(data.error || "Failed to fetch logs"); }
+        } catch(e) { alert("Network Connection Error"); }
+    }
+
+    async function processActivation() {
+        const apiKey = document.getElementById('secret_key').value;
+        const email = document.getElementById('customer_email').value;
+        if(!apiKey || !email) { alert("Both Key and Customer Email are required!"); return; }
+
+        try {
+            const res = await fetch('/api/v1/activate-user', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({api_key: apiKey, user_email: email})
+            });
+            const data = await res.json();
+            if(res.ok) {
+                alert("Account Activated Successfully!");
+                fetchPartnerData();
+            } else { alert("Error: " + data.error); }
+        } catch(e) { alert("Server connection timeout"); }
+    }
+</script>
+
+</body>
+</html>
 
