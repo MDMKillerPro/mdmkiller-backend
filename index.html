@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Glow Behind content */
+        /* Ambient Glow Background Element */
         .glow-bg {
             position: fixed;
             top: -15%;
@@ -35,11 +35,11 @@
             pointer-events: none;
         }
 
-        /* Top Premium Navigation Bar */
+        /* Premium Responsive Header and Navigation Section */
         nav {
             background-color: #121822;
             border-bottom: 1px solid rgba(36, 49, 65, 0.6);
-            padding: 16px 40px;
+            padding: 16px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -48,16 +48,31 @@
             z-index: 1000;
         }
 
-        .nav-logo {
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: 1px;
+        /* Dynamic Shield Brand Wrapper */
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .header-logo-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .nav-logo-text {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
             color: #ffffff;
         }
 
+        /* Space Fixes for Main Menu Entries */
         .nav-items { 
             display: flex; 
-            gap: 25px; 
+            gap: 20px; 
             list-style: none; 
             align-items: center;
         }
@@ -65,20 +80,22 @@
         .nav-link { 
             color: #8fa0b5; 
             text-decoration: none; 
-            font-size: 14px; 
+            font-size: 13px; 
             font-weight: 600; 
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             cursor: pointer;
+            padding: 4px 6px;
         }
         .nav-link:hover, .nav-link.active { color: #10b981; }
 
-        /* Highlight Partner Portal tab inside Nav bar corner */
+        /* Partner Portal layout tab */
         .nav-link-portal {
             color: #38bdf8;
             border: 1px solid rgba(56, 189, 248, 0.3);
             padding: 6px 12px;
             border-radius: 6px;
             background-color: rgba(56, 189, 248, 0.02);
+            font-size: 13px;
         }
         .nav-link-portal:hover, .nav-link-portal.active {
             color: #ffffff;
@@ -86,12 +103,12 @@
             background-color: rgba(56, 189, 248, 0.1);
         }
 
-        /* Main Container Wrapper */
+        /* Container View Window */
         .container {
             max-width: 900px;
             width: 100%;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
             flex-grow: 1;
         }
@@ -116,10 +133,8 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* SECTION 1: HOME VIEW (Ultra Clean Layout) */
-        #home-section {
-            display: block;
-        }
+        /* Core Section Architecture */
+        #home-section { display: block; }
 
         .btn-layout-grid {
             display: flex;
@@ -129,7 +144,7 @@
             margin-top: 20px;
         }
 
-        /* Premium Green Buy Now Button */
+        /* Glossy Dark Green Actions Button */
         .btn-buy-now {
             display: inline-block;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -152,7 +167,7 @@
             box-shadow: 0 15px 30px rgba(16, 185, 129, 0.45);
         }
 
-        /* Sharp Blue Download Button */
+        /* Custom Soft Glossy Blue Download Action Target */
         .btn-download-now {
             display: inline-flex;
             align-items: center;
@@ -184,8 +199,7 @@
             fill: currentColor;
         }
 
-
-        /* SECTION 2: DISTRIBUTION DIRECTORY LIST (Customers Only) */
+        /* Distribution Directory Container List (Hidden by default) */
         #network-section {
             display: none;
             text-align: left;
@@ -213,14 +227,14 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
         }
 
+        .list-card:hover { border-color: rgba(16, 185, 129, 0.3); }
         .info-block h3 { font-size: 17px; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 10px; }
         .verify-tag { font-size: 10px; font-weight: 800; background-color: rgba(16, 185, 129, 0.12); color: #10b981; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
         .info-block p { font-size: 14px; color: #64748b; margin-top: 5px; }
         .btn-contact-partner { background-color: #1b2330; border: 1px solid #2d3949; color: #cbd5e1; text-decoration: none; padding: 11px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; }
         .btn-contact-partner:hover { background-color: #10b981; border-color: #10b981; color: #ffffff; }
 
-
-        /* SECTION 3: PARTNER MANAGEMENT PORTAL (Staff/Reseller Dashboard) */
+        /* Hidden Activation Engine Module */
         #portal-section {
             display: none;
             text-align: left;
@@ -235,7 +249,7 @@
         }
 
         .portal-header-box { text-align: center; margin-bottom: 25px; }
-        .portal-logo-shield { width: 50px; height: 50px; margin-bottom: 10px; }
+        .portal-logo-shield { width: 45px; height: 45px; margin-bottom: 10px; object-fit: contain; }
         .portal-title-text { font-size: 16px; font-weight: 600; color: #cbd5e1; }
 
         .form-group { margin-bottom: 18px; }
@@ -244,20 +258,10 @@
         input:focus { border-color: #38bdf8; }
 
         .btn-submit-activation {
-            width: 100%;
-            background-color: #222d3a;
-            border: 1px solid #2d3949;
-            color: #ffffff;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 5px;
-            margin-bottom: 20px;
+            width: 100%; background-color: #222d3a; border: 1px solid #2d3949; color: #ffffff;
+            padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 5px; margin-bottom: 20px;
         }
         .btn-submit-activation:hover { background-color: #38bdf8; border-color: #38bdf8; }
-
         .status-row { font-size: 13px; color: #64748b; margin-bottom: 6px; }
         .active-green { color: #10b981; }
 
@@ -266,8 +270,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-
-        /* Floating Telegram Action Button */
+        /* Floating Circular Telegram Channel System Icon Trigger */
         .floating-telegram {
             position: fixed;
             bottom: 30px;
@@ -286,165 +289,22 @@
         .floating-telegram:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 25px rgba(36, 161, 222, 0.6); }
         .floating-tg-icon { width: 30px; height: 30px; fill: #ffffff; margin-right: 2px; }
 
-        /* Footer System */
-        .branding-footer { margin-top: auto; padding: 80px 20px 40px 20px; border-top: 1px solid rgba(36, 49, 65, 0.25); }
-        .brand-logo-svg { width: 45px; height: 45px; margin: 0 auto 12px auto; display: block; }
+        /* Unified Clean Footer Area without GLOBAL */
+        .branding-footer {
+            margin-top: auto;
+            padding: 60px 20px 40px 20px;
+            border-top: 1px solid rgba(36, 49, 65, 0.25);
+        }
+
+        .brand-footer-logo-img {
+            width: 45px;
+            height: 45px;
+            margin: 0 auto 12px auto;
+            display: block;
+            object-fit: contain;
+        }
+
         .brand-title { font-size: 17px; font-weight: 700; letter-spacing: 2px; color: #ffffff; }
         .footer-sub-links { display: flex; justify-content: center; gap: 20px; font-size: 13px; color: #475569; margin: 20px 0; }
-        .footer-sub-links a { color: #475569; text-decoration: none; }
-        .footer-sub-links a:hover { color: #64748b; }
-        .cr-text { font-size: 12px; color: #334155; }
-    </style>
-</head>
-<body>
-
-<div class="glow-bg"></div>
-
-<nav>
-    <div class="nav-logo">MDMKILLERPRO</div>
-    <ul class="nav-items">
-        <li><a id="nav-home" class="nav-link active" onclick="toggleView('home')">Home</a></li>
-        <li><a id="nav-network" class="nav-link" onclick="toggleView('network')">Distributors & Resellers</a></li>
-        <li><a class="nav-link" href="#">Pricing</a></li>
-        <li><a class="nav-link" href="#">Models</a></li>
-        <li><a class="nav-link" href="#">API</a></li>
-        <li><a id="nav-portal" class="nav-link nav-link-portal" onclick="toggleView('portal')">Partner Portal</a></li>
-    </ul>
-</nav>
-
-<div class="container">
-
-    <div id="home-section">
-        <div class="deployment-tag">Deployment Stable 2.0</div>
-        <h1>Permanent Device Unlock</h1>
-        
-        <div class="btn-layout-grid">
-            <a href="https://t.me/MDMKillerPro_Admin" target="_blank" class="btn-buy-now">Buy Now</a>
-            
-            <a href="https://mega.nz/file/KnQgjDRR#7SLEElXuyElR2HTIH4FPqiZ_kOH6zhgHRCxQEPWNQ4A" target="_blank" class="btn-download-now">
-                <svg class="download-svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/>
-                </svg>
-                Download MDMKillerPro v1.0.9.9
-            </a>
-        </div>
-    </div>
-
-    <div id="network-section">
-        <div class="section-title">Authorized Distributors</div>
-        
-        <div class="list-card">
-            <div class="info-block">
-                <h3>Global GSM Service <span class="verify-tag">Verified</span></h3>
-                <p>Region: International Bulk Sales</p>
-            </div>
-            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
-        </div>
-
-        <div class="list-card">
-            <div class="info-block">
-                <h3>Asia Unlocker Team <span class="verify-tag">Verified</span></h3>
-                <p>Region: Asia & Mainland Infrastructure</p>
-            </div>
-            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
-        </div>
-
-        <div class="section-title">Official Resellers</div>
-        
-        <div class="list-card">
-            <div class="info-block">
-                <h3>Elite Phone Fix <span class="verify-tag">Online</span></h3>
-                <p>Instant Direct Server Key Vendor</p>
-            </div>
-            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
-        </div>
-    </div>
-
-    <div id="portal-section">
-        <div class="portal-header-box">
-            <svg class="portal-logo-shield" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#1f2a38" stroke="#38bdf8" stroke-width="2"/>
-                <path d="M22 22L30 30L38 22M30 30V40" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <div class="portal-title-text">Reseller & Distributor Portal</div>
-        </div>
-
-        <div class="form-group">
-            <label>Secret Key</label>
-            <input type="password" placeholder="Enter Secret Key">
-        </div>
-        
-        <div class="form-group">
-            <label>Customer Email</label>
-            <input type="email" placeholder="Customer Email">
-        </div>
-        
-        <button class="btn-submit-activation">Request Activation</button>
-        
-        <div class="status-row">API Status: <span class="active-green">Active</span></div>
-        <div class="status-row">Server: <span class="active-green">24/7 Live</span></div>
-        <div class="status-row">Activation Rate: <span class="active-green">100%</span></div>
-    </div>
-
-    <a href="https://t.me/Mdmkillerpro" target="_blank" class="floating-telegram" title="Join Telegram Channel">
-        <svg class="floating-tg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.78 18.65l.28-4.28 7.76-7.01c.34-.3-.07-.46-.52-.16L7.75 12.25 3.59 10.93c-.9-.28-.92-.9.19-1.33l16.27-6.27c.75-.28 1.41.17 1.15 1.25l-2.77 13.04c-.2 1-.8 1.25-1.63.78l-4.22-3.11-2.03 1.96c-.23.23-.42.42-.86.42z"/>
-        </svg>
-    </a>
-
-    <div class="branding-footer">
-        <svg class="brand-logo-svg" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#151c25" stroke="#222d3a" stroke-width="3"/>
-            <path d="M18 22V38M18 22L30 30L42 22M42 22V38" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="brand-title">MDMKILLERPRO GLOBAL</div>
-        
-        <div class="footer-sub-links">
-            <a href="#">Support</a> • 
-            <a href="#">Contact</a> • 
-            <a href="#">FAQ</a> • 
-            <a href="#">Global API Docs</a>
-        </div>
-        <div class="cr-text">© 2026 MDMKILLERPRO | SECURITY NETWORK</div>
-    </div>
-</div>
-
-<script>
-    // Tab switching architecture engine
-    function toggleView(viewType) {
-        const homeSec = document.getElementById('home-section');
-        const netSec = document.getElementById('network-section');
-        const portalSec = document.getElementById('portal-section');
-        
-        const navHome = document.getElementById('nav-home');
-        const navNet = document.getElementById('nav-network');
-        const navPort = document.getElementById('nav-portal');
-
-        // Reset active links
-        navHome.classList.remove('active');
-        navNet.classList.remove('active');
-        navPort.classList.remove('active');
-
-        // View logic injection
-        if(viewType === 'home') {
-            homeSec.style.display = 'block';
-            netSec.style.display = 'none';
-            portalSec.style.display = 'none';
-            navHome.classList.add('active');
-        } else if(viewType === 'network') {
-            homeSec.style.display = 'none';
-            netSec.style.display = 'block';
-            portalSec.style.display = 'none';
-            navNet.classList.add('active');
-        } else if(viewType === 'portal') {
-            homeSec.style.display = 'none';
-            netSec.style.display = 'none';
-            portalSec.style.display = 'block';
-            navPort.classList.add('active');
-        }
-    }
-</script>
-
-</body>
-</html>
+        .footer-sub-links a { color: #47
 
