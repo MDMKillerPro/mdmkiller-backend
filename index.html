@@ -22,33 +22,34 @@
             overflow-x: hidden;
         }
 
-        /* Ambient Glow Background Element */
         .glow-bg {
             position: fixed;
             top: -15%;
             left: 50%;
             transform: translateX(-50%);
-            width: 900px;
+            width: 100%;
+            max-width: 900px;
             height: 450px;
             background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Premium Responsive Header and Navigation Section */
+        /* Fixed Navigation Layout to prevent text collisions */
         nav {
             background-color: #121822;
             border-bottom: 1px solid rgba(36, 49, 65, 0.6);
-            padding: 16px 5%;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        /* Dynamic Shield Brand Wrapper */
         .brand-container {
             display: flex;
             align-items: center;
@@ -56,10 +57,11 @@
             cursor: pointer;
         }
 
-        .header-logo-img {
+        /* Standard Vector Shield Logo Implementation */
+        .header-logo-svg {
             width: 32px;
             height: 32px;
-            object-fit: contain;
+            fill: none;
         }
 
         .nav-logo-text {
@@ -69,46 +71,46 @@
             color: #ffffff;
         }
 
-        /* Space Fixes for Main Menu Entries */
-        .nav-items { 
-            display: flex; 
-            gap: 20px; 
-            list-style: none; 
+        .nav-items {
+            display: flex;
+            gap: 20px;
+            list-style: none;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        .nav-link { 
-            color: #8fa0b5; 
-            text-decoration: none; 
-            font-size: 13px; 
-            font-weight: 600; 
-            letter-spacing: 0.3px;
+        .nav-link {
+            color: #8fa0b5;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
-            padding: 4px 6px;
+            padding: 6px 8px;
         }
-        .nav-link:hover, .nav-link.active { color: #10b981; }
 
-        /* Partner Portal layout tab */
+        .nav-link:hover, .nav-link.active {
+            color: #10b981;
+        }
+
         .nav-link-portal {
             color: #38bdf8;
             border: 1px solid rgba(56, 189, 248, 0.3);
             padding: 6px 12px;
             border-radius: 6px;
             background-color: rgba(56, 189, 248, 0.02);
-            font-size: 13px;
         }
+
         .nav-link-portal:hover, .nav-link-portal.active {
             color: #ffffff;
             border-color: #38bdf8;
             background-color: rgba(56, 189, 248, 0.1);
         }
 
-        /* Container View Window */
         .container {
             max-width: 900px;
             width: 100%;
             margin: 0 auto;
-            padding: 80px 20px;
+            padding: 60px 20px;
             text-align: center;
             flex-grow: 1;
         }
@@ -133,7 +135,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Core Section Architecture */
         #home-section { display: block; }
 
         .btn-layout-grid {
@@ -144,7 +145,6 @@
             margin-top: 20px;
         }
 
-        /* Glossy Dark Green Actions Button */
         .btn-buy-now {
             display: inline-block;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -154,7 +154,6 @@
             border-radius: 8px;
             font-weight: 700;
             font-size: 16px;
-            letter-spacing: 0.5px;
             border: none;
             cursor: pointer;
             width: 100%;
@@ -167,7 +166,6 @@
             box-shadow: 0 15px 30px rgba(16, 185, 129, 0.45);
         }
 
-        /* Custom Soft Glossy Blue Download Action Target */
         .btn-download-now {
             display: inline-flex;
             align-items: center;
@@ -199,7 +197,7 @@
             fill: currentColor;
         }
 
-        /* Distribution Directory Container List (Hidden by default) */
+        /* NETWORK VERIFIED LIST */
         #network-section {
             display: none;
             text-align: left;
@@ -227,18 +225,17 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
         }
 
-        .list-card:hover { border-color: rgba(16, 185, 129, 0.3); }
         .info-block h3 { font-size: 17px; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 10px; }
         .verify-tag { font-size: 10px; font-weight: 800; background-color: rgba(16, 185, 129, 0.12); color: #10b981; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
         .info-block p { font-size: 14px; color: #64748b; margin-top: 5px; }
         .btn-contact-partner { background-color: #1b2330; border: 1px solid #2d3949; color: #cbd5e1; text-decoration: none; padding: 11px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; }
         .btn-contact-partner:hover { background-color: #10b981; border-color: #10b981; color: #ffffff; }
 
-        /* Hidden Activation Engine Module */
+        /* RESELLER AND DISTRIBUTOR PORTAL */
         #portal-section {
             display: none;
             text-align: left;
-            max-width: 500px;
+            max-width: 550px;
             margin: 20px auto;
             background-color: #131a22;
             border: 1px solid #222d3a;
@@ -249,28 +246,42 @@
         }
 
         .portal-header-box { text-align: center; margin-bottom: 25px; }
-        .portal-logo-shield { width: 45px; height: 45px; margin-bottom: 10px; object-fit: contain; }
-        .portal-title-text { font-size: 16px; font-weight: 600; color: #cbd5e1; }
+        .portal-logo-shield { width: 45px; height: 45px; margin-bottom: 10px; }
 
-        .form-group { margin-bottom: 18px; }
-        label { display: block; color: #94a3b8; font-size: 13px; margin-bottom: 8px; }
+        .credit-display-box {
+            background-color: rgba(56, 189, 248, 0.05);
+            border: 1px dashed #38bdf8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        .credit-num { font-size: 24px; font-weight: 800; color: #38bdf8; }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; color: #94a3b8; font-size: 13px; margin-bottom: 6px; }
         input { width: 100%; background-color: #0b0f15; border: 1px solid #222d3a; border-radius: 6px; padding: 12px 15px; color: white; font-size: 14px; outline: none; }
         input:focus { border-color: #38bdf8; }
 
-        .btn-submit-activation {
-            width: 100%; background-color: #222d3a; border: 1px solid #2d3949; color: #ffffff;
-            padding: 12px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 5px; margin-bottom: 20px;
+        .btn-portal-action {
+            width: 48%; background-color: #1e2631; border: 1px solid #2d3949; color: #cbd5e1; padding: 12px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; margin-bottom: 15px; display: inline-block;
         }
-        .btn-submit-activation:hover { background-color: #38bdf8; border-color: #38bdf8; }
+        .btn-portal-action:hover { background-color: #243141; color: white; }
+        .btn-main-blue { background: #007fff; border-color: #007fff; color: white; float: right; }
+        .btn-main-blue:hover { background: #0066cc; }
+
+        .history-title { font-size: 14px; font-weight: 700; color: #94a3b8; margin: 20px 0 10px 0; border-bottom: 1px solid #222d3a; padding-bottom: 5px; }
+        .history-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+        .history-table th { color: #64748b; padding: 8px; border-bottom: 1px solid #222d3a; }
+        .history-table td { padding: 8px; color: #cbd5e1; border-bottom: 1px solid #161f28; }
+
         .status-row { font-size: 13px; color: #64748b; margin-bottom: 6px; }
         .active-green { color: #10b981; }
 
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes slideUpFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Floating Circular Telegram Channel System Icon Trigger */
+        /* Floating Circular Telegram Channel Trigger */
         .floating-telegram {
             position: fixed;
             bottom: 30px;
@@ -289,22 +300,203 @@
         .floating-telegram:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 25px rgba(36, 161, 222, 0.6); }
         .floating-tg-icon { width: 30px; height: 30px; fill: #ffffff; margin-right: 2px; }
 
-        /* Unified Clean Footer Area without GLOBAL */
-        .branding-footer {
-            margin-top: auto;
-            padding: 60px 20px 40px 20px;
-            border-top: 1px solid rgba(36, 49, 65, 0.25);
-        }
-
-        .brand-footer-logo-img {
-            width: 45px;
-            height: 45px;
-            margin: 0 auto 12px auto;
-            display: block;
-            object-fit: contain;
-        }
-
+        .branding-footer { margin-top: auto; padding: 60px 20px 40px 20px; border-top: 1px solid rgba(36, 49, 65, 0.25); }
+        .brand-footer-logo-svg { width: 45px; height: 45px; margin: 0 auto 12px auto; display: block; }
         .brand-title { font-size: 17px; font-weight: 700; letter-spacing: 2px; color: #ffffff; }
         .footer-sub-links { display: flex; justify-content: center; gap: 20px; font-size: 13px; color: #475569; margin: 20px 0; }
-        .footer-sub-links a { color: #47
+        .footer-sub-links a { color: #475569; text-decoration: none; }
+        .footer-sub-links a:hover { color: #64748b; }
+        .cr-text { font-size: 12px; color: #334155; }
+    </style>
+</head>
+<body>
+
+<div class="glow-bg"></div>
+
+<nav>
+    <div class="brand-container" onclick="toggleView('home')">
+        <svg class="header-logo-svg" viewBox="0 0 60 60">
+            <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#1f2a38" stroke="#ffffff" stroke-width="3"/>
+            <path d="M18 22V38M18 22L30 30L42 22M42 22V38" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="nav-logo-text">MDMKILLERPRO</div>
+    </div>
+    <ul class="nav-items">
+        <li><a id="nav-home" class="nav-link active" onclick="toggleView('home')">Home</a></li>
+        <li><a id="nav-network" class="nav-link" onclick="toggleView('network')">Distributors & Resellers</a></li>
+        <li><a class="nav-link" href="#">Pricing</a></li>
+        <li><a class="nav-link" href="#">Models</a></li>
+        <li><a class="nav-link" href="#">API</a></li>
+        <li><a id="nav-portal" class="nav-link nav-link-portal" onclick="toggleView('portal')">Partner Portal</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <div id="home-section">
+        <div class="deployment-tag">Deployment Stable 2.0</div>
+        <h1>Permanent Device Unlock</h1>
+        
+        <div class="btn-layout-grid">
+            <a href="https://t.me/MDMKillerPro_Admin" target="_blank" class="btn-buy-now">Buy Now</a>
+            <a href="https://mega.nz/file/KnQgjDRR#7SLEElXuyElR2HTIH4FPqiZ_kOH6zhgHRCxQEPWNQ4A" target="_blank" class="btn-download-now">
+                <svg class="download-svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/>
+                </svg>
+                Download MDMKillerPro v1.0.9.9
+            </a>
+        </div>
+    </div>
+
+    <div id="network-section">
+        <div class="section-title">Authorized Distributors</div>
+        <div class="list-card">
+            <div class="info-block">
+                <h3>Global GSM Service <span class="verify-tag">Verified</span></h3>
+                <p>Region: International Bulk Sales</p>
+            </div>
+            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
+        </div>
+    </div>
+
+    <div id="portal-section">
+        <div class="portal-header-box">
+            <svg class="portal-logo-shield" viewBox="0 0 60 60">
+                <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#1f2a38" stroke="#38bdf8" stroke-width="2"/>
+                <path d="M22 22L30 30L38 22M30 30V40" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="portal-title-text" id="partner-panel-title">Reseller & Distributor Portal</div>
+        </div>
+
+        <div class="credit-display-box" id="balance-container">
+            <div style="font-size: 11px; color: #64748b; font-weight: 700; letter-spacing: 1px;">YOUR LIVE WALLET</div>
+            <div class="credit-num" id="live-credits-count">0 Cr</div>
+        </div>
+
+        <div class="form-group">
+            <label>Secret Key</label>
+            <input type="password" id="secret_key" placeholder="Enter Secret Key">
+        </div>
+        
+        <div class="form-group">
+            <label>Customer Email</label>
+            <input type="email" id="customer_email" placeholder="Customer Email to Activate">
+        </div>
+        
+        <button class="btn-portal-action" onclick="fetchPartnerData()">Check Credits & Logs</button>
+        <button class="btn-portal-action btn-main-blue" onclick="processActivation()">Request Activation</button>
+        
+        <div class="history-title">Recent Activation History</div>
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Customer Email</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody id="history-log-rows">
+                <tr>
+                    <td colspan="2" style="color: #475569; text-align: center; padding: 15px;">Enter Key & click Check Logs to fetch history</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 25px;">
+            <div class="status-row">API Status: <span class="active-green">Active</span></div>
+            <div class="status-row">Server: <span class="active-green">24/7 Live</span></div>
+        </div>
+    </div>
+
+    <a href="https://t.me/Mdmkillerpro" target="_blank" class="floating-telegram">
+        <svg class="floating-tg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.78 18.65l.28-4.28 7.76-7.01c.34-.3-.07-.46-.52-.16L7.75 12.25 3.59 10.93c-.9-.28-.92-.9.19-1.33l16.27-6.27c.75-.28 1.41.17 1.15 1.25l-2.77 13.04c-.2 1-.8 1.25-1.63.78l-4.22-3.11-2.03 1.96c-.23.23-.42.42-.86.42z"/>
+        </svg>
+    </a>
+
+    <div class="branding-footer">
+        <svg class="brand-footer-logo-svg" viewBox="0 0 60 60">
+            <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#151c25" stroke="#222d3a" stroke-width="3"/>
+            <path d="M18 22V38M18 22L30 30L42 22M42 22V38" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="brand-title">MDMKILLERPRO</div>
+        <div class="footer-sub-links">
+            <a href="#">Support</a> • <a href="#">Contact</a> • <a href="#">FAQ</a> • <a href="#">Global API Docs</a>
+        </div>
+        <div class="cr-text">© 2026 MDMKILLERPRO | SECURITY NETWORK</div>
+    </div>
+</div>
+
+<script>
+    function toggleView(viewType) {
+        const homeSec = document.getElementById('home-section');
+        const netSec = document.getElementById('network-section');
+        const portalSec = document.getElementById('portal-section');
+        const navHome = document.getElementById('nav-home');
+        const navNet = document.getElementById('nav-network');
+        const navPort = document.getElementById('nav-portal');
+
+        navHome.classList.remove('active'); navNet.classList.remove('active'); navPort.classList.remove('active');
+
+        if(viewType === 'home') {
+            homeSec.style.display = 'block'; netSec.style.display = 'none'; portalSec.style.display = 'none'; navHome.classList.add('active');
+        } else if(viewType === 'network') {
+            homeSec.style.display = 'none'; netSec.style.display = 'block'; portalSec.style.display = 'none'; navNet.classList.add('active');
+        } else if(viewType === 'portal') {
+            homeSec.style.display = 'none'; netSec.style.display = 'none'; portalSec.style.display = 'block'; navPort.classList.add('active');
+        }
+    }
+
+    async function fetchPartnerData() {
+        const apiKey = document.getElementById('secret_key').value;
+        if(!apiKey) { alert("Please enter your Secret Key."); return; }
+
+        try {
+            const res = await fetch('/api/v1/get-portal-data', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({api_key: apiKey})
+            });
+            const data = await res.json();
+            
+            if(res.ok) {
+                document.getElementById('balance-container').style.display = 'block';
+                document.getElementById('live-credits-count').innerText = data.credits + " Cr";
+                document.getElementById('partner-panel-title').innerText = `${data.name} (${data.role.toUpperCase()})`;
+                
+                const tbody = document.getElementById('history-log-rows');
+                tbody.innerHTML = '';
+                
+                if(data.history.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center;color:#475569;">No accounts activated yet.</td></tr>`;
+                } else {
+                    data.history.forEach(log => {
+                        tbody.innerHTML += `<tr><td>${log.email}</td><td>${log.activation_date || 'N/A'}</td></tr>`;
+                    });
+                }
+            } else { alert(data.error || "Failed to fetch logs"); }
+        } catch(e) { alert("Network Connection Error"); }
+    }
+
+    async function processActivation() {
+        const apiKey = document.getElementById('secret_key').value;
+        const email = document.getElementById('customer_email').value;
+        if(!apiKey || !email) { alert("Both Key and Customer Email are required!"); return; }
+
+        try {
+            const res = await fetch('/api/v1/activate-user', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({api_key: apiKey, user_email: email})
+            });
+            const data = await res.json();
+            if(res.ok) {
+                alert("Account Activated Successfully!");
+                fetchPartnerData();
+            } else { alert("Error: " + data.error); }
+        } catch(e) { alert("Server connection timeout"); }
+    }
+</script>
+
+</body>
+</html>
 
