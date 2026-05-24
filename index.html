@@ -35,7 +35,7 @@
             pointer-events: none;
         }
 
-        /* Fixed Navigation Layout to prevent text collisions */
+        /* Fixed Navigation Layout */
         nav {
             background-color: #121822;
             border-bottom: 1px solid rgba(36, 49, 65, 0.6);
@@ -57,7 +57,6 @@
             cursor: pointer;
         }
 
-        /* Standard Vector Shield Logo Implementation */
         .header-logo-svg {
             width: 32px;
             height: 32px;
@@ -166,6 +165,7 @@
             box-shadow: 0 15px 30px rgba(16, 185, 129, 0.45);
         }
 
+        /* Glossy Blue Button Structure without version labels */
         .btn-download-now {
             display: inline-flex;
             align-items: center;
@@ -197,7 +197,7 @@
             fill: currentColor;
         }
 
-        /* NETWORK VERIFIED LIST */
+        /* PUBLIC DIRECTORY NETWORK DATA LIST */
         #network-section {
             display: none;
             text-align: left;
@@ -231,7 +231,7 @@
         .btn-contact-partner { background-color: #1b2330; border: 1px solid #2d3949; color: #cbd5e1; text-decoration: none; padding: 11px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; }
         .btn-contact-partner:hover { background-color: #10b981; border-color: #10b981; color: #ffffff; }
 
-        /* RESELLER AND DISTRIBUTOR PORTAL */
+        /* RE-ENGINEERED STAFF LIVE CONTROL PANELS */
         #portal-section {
             display: none;
             text-align: left;
@@ -281,7 +281,7 @@
 
         @keyframes slideUpFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Floating Circular Telegram Channel Trigger */
+        /* Floating Circular Telegram Trigger */
         .floating-telegram {
             position: fixed;
             bottom: 30px;
@@ -343,7 +343,7 @@
                 <svg class="download-svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/>
                 </svg>
-                Download MDMKillerPro v1.0.9.9
+                Download MDMKillerPro
             </a>
         </div>
     </div>
@@ -465,38 +465,4 @@
                 
                 const tbody = document.getElementById('history-log-rows');
                 tbody.innerHTML = '';
-                
-                if(data.history.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center;color:#475569;">No accounts activated yet.</td></tr>`;
-                } else {
-                    data.history.forEach(log => {
-                        tbody.innerHTML += `<tr><td>${log.email}</td><td>${log.activation_date || 'N/A'}</td></tr>`;
-                    });
-                }
-            } else { alert(data.error || "Failed to fetch logs"); }
-        } catch(e) { alert("Network Connection Error"); }
-    }
-
-    async function processActivation() {
-        const apiKey = document.getElementById('secret_key').value;
-        const email = document.getElementById('customer_email').value;
-        if(!apiKey || !email) { alert("Both Key and Customer Email are required!"); return; }
-
-        try {
-            const res = await fetch('/api/v1/activate-user', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({api_key: apiKey, user_email: email})
-            });
-            const data = await res.json();
-            if(res.ok) {
-                alert("Account Activated Successfully!");
-                fetchPartnerData();
-            } else { alert("Error: " + data.error); }
-        } catch(e) { alert("Server connection timeout"); }
-    }
-</script>
-
-</body>
-</html>
 
