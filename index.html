@@ -35,7 +35,7 @@
             pointer-events: none;
         }
 
-        /* Fixed Navigation Layout */
+        /* Navigation Layout */
         nav {
             background-color: #121822;
             border-bottom: 1px solid rgba(36, 49, 65, 0.6);
@@ -63,7 +63,6 @@
             fill: none;
         }
 
-        /* Branding Text Color Logic */
         .nav-logo-text {
             font-size: 16px;
             font-weight: 800;
@@ -72,7 +71,7 @@
         }
 
         .blue-brand {
-            color: #007fff; /* Electric Blue */
+            color: #007fff;
         }
 
         .nav-items {
@@ -228,13 +227,61 @@
             align-items: center;
             margin-bottom: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .partner-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .partner-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: contain;
+            background-color: #1a2332;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4px;
         }
 
         .info-block h3 { font-size: 17px; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 10px; }
         .verify-tag { font-size: 10px; font-weight: 800; background-color: rgba(0, 127, 255, 0.12); color: #007fff; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
         .info-block p { font-size: 14px; color: #64748b; margin-top: 5px; }
-        .btn-contact-partner { background-color: #1b2330; border: 1px solid #2d3949; color: #cbd5e1; text-decoration: none; padding: 11px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; }
-        .btn-contact-partner:hover { background-color: #007fff; border-color: #007fff; color: #ffffff; }
+        
+        .actions-wrapper {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-contact-partner { 
+            background-color: #1b2330; 
+            border: 1px solid #2d3949; 
+            color: #cbd5e1; 
+            text-decoration: none; 
+            padding: 11px 18px; 
+            border-radius: 6px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-contact-partner:hover { 
+            background-color: #007fff; 
+            border-color: #007fff; 
+            color: #ffffff; 
+        }
+
+        .btn-wa:hover {
+            background-color: #25D366;
+            border-color: #25D366;
+            color: #ffffff;
+        }
 
         /* PORTAL PANEL */
         #portal-section {
@@ -355,29 +402,19 @@
 
     <div id="network-section" class="content-section">
         <div class="section-title">Authorized Distributors</div>
-        <div class="list-card">
-            <div class="info-block">
-                <h3>Global GSM Service <span class="verify-tag">Verified</span></h3>
-                <p>Region: International Bulk Sales</p>
-            </div>
-            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
-        </div>
         
         <div class="list-card">
-            <div class="info-block">
-                <h3>Asia Unlocker Team <span class="verify-tag">Verified</span></h3>
-                <p>Region: Asia & Mainland Infrastructure</p>
+            <div class="partner-meta">
+                <img class="partner-icon" src="https://support.halabtech.com/media/site/37265-01738663322.png" alt="Halabtech Logo" onerror="this.style.display='none'">
+                <div class="info-block">
+                    <h3>Halabtech <span class="verify-tag">Verified</span></h3>
+                    <p>Region: Worldwide | Website: server.halabtech.com</p>
+                </div>
             </div>
-            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
-        </div>
-
-        <div class="section-title">Official Resellers</div>
-        <div class="list-card">
-            <div class="info-block">
-                <h3>Elite Phone Fix <span class="verify-tag">Online</span></h3>
-                <p>Instant Direct Server Key Vendor</p>
+            <div class="actions-wrapper">
+                <a href="https://telegram.me/htsupport" target="_blank" class="btn-contact-partner">Telegram</a>
+                <a href="https://server.halabtech.com/contactus" target="_blank" class="btn-contact-partner btn-wa">WhatsApp</a>
             </div>
-            <a href="https://t.me/Mdmkillerpro" target="_blank" class="btn-contact-partner">Contact Partner</a>
         </div>
     </div>
 
@@ -531,4 +568,3 @@
 
 </body>
 </html>
-
