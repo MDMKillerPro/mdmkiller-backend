@@ -237,14 +237,20 @@
             gap: 15px;
         }
 
-        .partner-icon {
-            width: 48px;
-            height: 48px;
+        /* Pure CSS Text Badge instead of image file link */
+        .partner-text-badge {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
             border-radius: 8px;
-            object-fit: contain;
-            background-color: #1a2332;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 900;
+            color: #0b0f15;
+            letter-spacing: -0.5px;
+            box-shadow: 0 4px 10px rgba(234, 179, 8, 0.2);
         }
 
         .info-block h3 { font-size: 17px; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 10px; }
@@ -277,7 +283,6 @@
             color: #ffffff; 
         }
 
-        /* Premium Brand Colors for Site Link Button */
         .btn-web:hover {
             background: linear-gradient(135deg, #007fff 0%, #0056b3 100%);
             border-color: #007fff;
@@ -339,5 +344,89 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width:
+            width: 60px;
+            height: 60px;
+            background-color: #24A1DE;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(36, 161, 222, 0.4);
+            z-index: 9999;
+            cursor: pointer;
+        }
+        .floating-telegram:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 25px rgba(36, 161, 222, 0.6); }
+        .floating-tg-icon { width: 30px; height: 30px; fill: #ffffff; margin-right: 2px; }
+
+        /* Footer Custom Framework */
+        .branding-footer { margin-top: auto; padding: 60px 20px 40px 20px; border-top: 1px solid rgba(36, 49, 65, 0.25); }
+        .brand-footer-logo-svg { width: 45px; height: 45px; margin: 0 auto 12px auto; display: block; }
+        .brand-title { font-size: 17px; font-weight: 700; letter-spacing: 2px; color: #ffffff; }
+        .footer-sub-links { display: flex; justify-content: center; gap: 20px; font-size: 13px; color: #475569; margin: 20px 0; }
+        .footer-sub-links a { color: #475569; text-decoration: none; }
+        .footer-sub-links a:hover { color: #64748b; }
+        .cr-text { font-size: 12px; color: #334155; }
+    </style>
+</head>
+<body>
+
+<div class="glow-bg"></div>
+
+<nav>
+    <div class="brand-container" onclick="toggleView('home')">
+        <svg class="header-logo-svg" viewBox="0 0 60 60">
+            <path d="M30 5L5 15V30C5 45 20 53 30 55C40 53 55 45 55 30V15L30 5Z" fill="#121822" stroke="#007fff" stroke-width="3"/>
+            <path d="M18 22V38M18 22L30 30L42 22M42 22V38" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="nav-logo-text"><span class="blue-brand">MDM</span>KILLERPRO</div>
+    </div>
+    <ul class="nav-items">
+        <li><a id="nav-home" class="nav-link active" onclick="toggleView('home')">Home</a></li>
+        <li><a id="nav-network" class="nav-link" onclick="toggleView('network')">Distributors & Resellers</a></li>
+        <li><a class="nav-link" href="#">Pricing</a></li>
+        <li><a class="nav-link" href="#">Models</a></li>
+        <li><a class="nav-link" href="#">API</a></li>
+        <li><a id="nav-portal" class="nav-link nav-link-portal" onclick="toggleView('portal')">Partner Portal</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <div id="home-section" class="content-section active-view">
+        <div class="deployment-tag">Deployment Stable 2.0</div>
+        <h1>Permanent Device Unlock</h1>
+        
+        <div class="btn-layout-grid">
+            <a href="https://t.me/MDMKillerPro_Admin" target="_blank" class="btn-buy-now">Buy Now</a>
+            <a href="https://mega.nz/file/KnQgjDRR#7SLEElXuyElR2HTIH4FPqiZ_kOH6zhgHRCxQEPWNQ4A" target="_blank" class="btn-download-now">
+                <svg class="download-svg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/>
+                </svg>
+                Download MDMKillerPro
+            </a>
+        </div>
+    </div>
+
+    <div id="network-section" class="content-section">
+        <div class="section-title">Authorized Distributors</div>
+        
+        <div class="list-card">
+            <div class="partner-meta">
+                <div class="partner-text-badge">HT</div>
+                <div class="info-block">
+                    <h3>Halabtech <span class="verify-tag">Verified</span></h3>
+                    <p>Region: Worldwide | Website: server.halabtech.com</p>
+                </div>
+            </div>
+            <div class="actions-wrapper">
+                <a href="https://telegram.me/htsupport" target="_blank" class="btn-contact-partner">Telegram</a>
+                <a href="https://server.halabtech.com/" target="_blank" class="btn-contact-partner btn-web">Visit Website</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="portal-section" class="content-section">
+        <div class="portal-header-box">
+            <svg class="portal-logo-shield" viewBox="0 0 60 60">
+                <path d="M30 5L5
 
